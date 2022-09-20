@@ -592,7 +592,6 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
               const data = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
 	      const file = data.data
 	      
-	   let link = search.url
 const waladown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: waladown.key })
 const walaup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
