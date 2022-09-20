@@ -347,21 +347,21 @@ mek = mek.messages[0]
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		 
 		      
 		 case 'song' :
-	      try {
-	     if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
-	     
-             if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )  
-		const msg = '╔══[🐶𝙱𝙾𝙱𝙸𝚉 𝙱𝙾𝚃🐕]══╗\n╠   📥YOUTUBE MP3 DL📤 ║\n╚═════════════╝\n\n║ select mp3 type \n\n╚═════════════◈'
-      const buttons = [
-{buttonId: prefix +'ausong ' + q, buttonText: {displayText: 'AUDIO'}, type: 1},
-{buttonId: prefix +'dcsong ' + q, buttonText: {displayText: 'DOCUMENT '}, type: 1},
+		
+		   try {
+			if (!q) return await conn.sendMessage(from , { text: 'need title' }, { quoted: mek } )   
+			const ytl = await ytinfo(q)
+			const buttons = [
+{buttonId: prefix +'ausong ' + ytl.yuturl, buttonText: {displayText: 'AUDIO'}, type: 1},
+{buttonId: prefix +'dcsong ' + ytl.yuturl, buttonText: {displayText: 'DOCUMENT'}, type: 1},
 ]
- await conn.sendMessage(from, {  text: msg , footer: config.FOOTER , buttons: buttons , headerType: 4} , { quoted: mek } )  
-		      
-	      } catch(e) {
-		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
-	      }      
-	      break  
+			await conn.sendMessage(from, { image: {url: ytl.thumbnail  }, caption: ytl.msg , footer: config.FOOTER , buttons: buttons , headerType: 4} , { quoted: mek } )	
+			   
+		   } 
+		      catch(e) {
+		      await conn.sendMessage(from , { text: 'error\n\n' + e }, { quoted: mek } )
+		      }
+		break 
 		      
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
 		      
@@ -462,7 +462,7 @@ await conn.sendMessage(from, { delete: docsongup.key })
 		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
 	      }      
 	      break  
-		      case '480vid' :
+		      case '360vid' :
 	      try {
 	     if(!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
 	     
