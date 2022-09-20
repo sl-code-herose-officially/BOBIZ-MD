@@ -328,15 +328,13 @@ mek = mek.messages[0]
 		      // youtube //
 		      
 	        case 'yt' :
-		case 'ytd' :
-		case 'song' :
-		case 'video' : 
+		case 'play' :
 		   try {
 			if (!q) return await conn.sendMessage(from , { text: 'need title' }, { quoted: mek } )   
 			const ytl = await ytinfo(q)
 			const buttons = [
-{buttonId: prefix +'ytmp3 ' + ytl.yuturl, buttonText: {displayText: 'MP3'}, type: 1},
-{buttonId: prefix +'ytmp4 ' + ytl.yuturl, buttonText: {displayText: 'MP4'}, type: 1},
+{buttonId: prefix +'ausong ' + ytl.yuturl, buttonText: {displayText: 'AUDIO'}, type: 1},
+{buttonId: prefix +'420vid ' + ytl.yuturl, buttonText: {displayText: 'VIDEO'}, type: 1},
 ]
 			await conn.sendMessage(from, { image: {url: ytl.thumbnail  }, caption: ytl.msg , footer: config.FOOTER , buttons: buttons , headerType: 4} , { quoted: mek } )	
 			   
@@ -348,7 +346,7 @@ mek = mek.messages[0]
 		      
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		 
 		      
-		 case 'ytmp3' :
+		 case 'song' :
 	      try {
 	     if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
 	     
@@ -367,7 +365,7 @@ mek = mek.messages[0]
 		      
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
 		      
-	      case 'ytmp4' :
+	      case 'video' :
 	      try {
 	     if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
 	     
@@ -454,6 +452,22 @@ await conn.sendMessage(from, { delete: docsongup.key })
 	     
              if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )  
 	   let docsong = await yt480(q)
+const docsongdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
+await conn.sendMessage(from, { delete: docsongdown.key })
+const docsongup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
+await conn.sendMessage(from ,{ video: { url : docsong.url } , caption: config.CAPTION } , { quoted: mek })
+await conn.sendMessage(from, { delete: docsongup.key })
+		      
+	      } catch(e) {
+		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
+	      }      
+	      break  
+		      case '480vid' :
+	      try {
+	     if(!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
+	     
+             if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )  
+	   let docsong = await yt360(q)
 const docsongdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: docsongdown.key })
 const docsongup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
@@ -569,7 +583,7 @@ await conn.sendMessage(from , { text: 'cant find \n\n' + e }, { quoted: mek } )
       rows: srh
   }]
     const listMessage = {
-      text: " \n\n Keyword : " + q + '\n\n ',
+      text: " \n Input : " + q + '\n ',
       footer: config.FOOTER,
       title: 'Please Select What do you want',
       buttonText: "Results",
@@ -622,7 +636,10 @@ await conn.sendMessage(from, { delete: walaup.key })
 │  ⸙ .fb            
 │  ⸙ .ig          
 │  ⸙ .tiktok        
-│  ⸙ .yt            
+│  ⸙ .yt  
+│  ⸙ .song
+│  ⸙ .video
+│  ⸙ .porn
 │  ⸙ .yts           
 │  ⸙ .mediafire       
 │  ⸙ .stickget         
