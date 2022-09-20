@@ -594,7 +594,7 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 const xxxdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: xxxdown.key })
 const xxxup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
-await conn.sendMessage(from ,{ video: { url : data.url } , caption: data.title } , { quoted: mek })
+const xxx = await conn.sendMessage(from , { text: data.url }, { quoted: mek } )
 await conn.sendMessage(from, { delete: xxxup.key })
 		      
 	      
