@@ -561,7 +561,7 @@ await conn.sendMessage(from , { text: 'تعذر ارسال التطبيق آسف
       srh.push({
           title: data[i].title,
           description: data[i].duration,
-          rowId: prefix + 'xxx ' + data[i].link
+          rowId: prefix + 'dporn' + data[i].link
       });
   }
     const sections = [{
@@ -584,25 +584,24 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 		      
  //_______________________________________________________________________________________________________________________________________________________   //		      
 	// xxx // 
-		      
-	 case 'xxx': 
-		    try {
-			 if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } ) 
-			 const data = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
-                       
-		 
-const xxxdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
-await conn.sendMessage(from, { delete: xxxdown.key })
-const xxxup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
-const xxx = await conn.sendMessage(from , { text: data.url }, { quoted: mek } )
-await conn.sendMessage(from, { delete: xxxup.key })
-		      
+	
+	case 'dporn' :
+	      try {
+	     if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } )      
+	     
+              const search = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
 	      
-	      }
-		      catch(e) {
-await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )  
-} 
-	      break  
+	   let link = search.url
+const waladown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
+await conn.sendMessage(from, { delete: waladown.key })
+const walaup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
+await conn.sendMessage(from ,{ video: { url : link } , caption: config.CAPTION } , { quoted: mek })
+await conn.sendMessage(from, { delete: walaup.key })
+		      
+	      } catch(e) {
+		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
+	      }      
+	      break  	 
 		      
  //_______________________________________________________________________________________________________________________________________________________   //		      
 	// menu // 	      
