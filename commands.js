@@ -383,47 +383,46 @@ mek = mek.messages[0]
 	      break 
 		      
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
+		 
 		      
-		 case 'dcsong' :
-	      try {
-	     if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
-	     
-             if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )  
-		 let docsong = await ytmp3(q)
+		     case 'dcsong' :
+              try {
+	      if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )
+                                  let { yta } = require('./lib/y2mate')
+                                  let quality = args[1] ? args[1] : '256kbps'
+                                  let media = await yta(q, quality)
             const docsongdown = await conn.sendMessage(from , { text: config.SONG_DOWN }, { quoted: mek } )
             await conn.sendMessage(from, { delete: docsongdown.key })
             const docsongup = await conn.sendMessage(from , { text: config.SONG_UP }, { quoted: mek } )
-            const doc = await conn.sendMessage(from , { document : { url : docsong.mp3  } , mimetype : 'audio/mpeg' , fileName : docsong.title + '.mp3' } , { quoted: mek })
+            const doc = await conn.sendMessage(from , { document : { url : media.dl_link  } , mimetype : 'audio/mpeg' , fileName : media.title + '.mp3' } , { quoted: mek })
       
             await conn.sendMessage(from, { delete: docsongup.key })
     
 		      
 	      } catch(e) {
 		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
-	      }      
-	      break  
-		      
+	      }     
+		     break 
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
 		      
 			 case 'ausong' :
-	      try {
-	     if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )      
-	     
-             if ( !q.includes('youtu') ) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )  
-	    let docsong = await ytmp3(q)
+	       try {
+	      if (!q) return await conn.sendMessage(from , { text: 'need yt link' }, { quoted: mek } )
+                                  let { yta } = require('./lib/y2mate')
+                                  let quality = args[1] ? args[1] : '256kbps'
+                                  let media = await yta(q, quality)
             const docsongdown = await conn.sendMessage(from , { text: config.SONG_DOWN }, { quoted: mek } )
             await conn.sendMessage(from, { delete: docsongdown.key })
             const docsongup = await conn.sendMessage(from , { text: config.SONG_UP }, { quoted: mek } )
-            await conn.sendMessage(from ,{ audio: { url: docsong.mp3 }, mimetype: 'audio/mp4' } , { quoted: mek })
+	    await conn.sendMessage(from ,{ audio: { url: media.dl_link }, mimetype: 'audio/mp4' } , { quoted: mek })
             await conn.sendMessage(from, { delete: docsongup.key })
     
 		      
 	      } catch(e) {
 		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
-	      }      
-	      break   
-		      
-		      
+	      }     
+		     break 
+              
   // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //   		      
 		      
 		 case '720vid' :
