@@ -85,8 +85,7 @@ mek = mek.messages[0]
       
 		    // alive //  
 		      
-      case 'alive':
-         try {
+      case 'alive': {
 		conn.sendMessage(from , { text: 'I am Online Now' }, { quoted: mek } )
          } 
         break
