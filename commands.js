@@ -588,9 +588,9 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 	 case 'xxx': 
 		    try {
 			 if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } ) 
-			 const data = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
-                       let title = data.title
-		       let media = data.url
+			 const data = await fetchJson('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
+                       const title = data.title
+		       const media = data.url
 		 
 const xxxdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: xxxdown.key })
