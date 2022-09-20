@@ -40,7 +40,7 @@ async function ytinfo(name) {
         let views = arama[0].views;
         let author = arama[0].author.name;
         let url = arama[0].url
-        let result = { msg : '╔══[🐶𝙱𝙾𝙱𝙸𝚉 𝙱𝙾𝚃🐕]══╗\n╠  *📥YT DOWNLOADER تحميل الفيديوات من اليوتوب📤*  ╣\n╚═════════════╝\n\n║📽️ɴᴀᴍᴇ: ' + title2 + '\n\n║👁️ᴠɪᴇᴡs: ' + views + '\n\n║📹 ᴄʜᴀɴɴᴇʟ: ' + author + '\n\n║🖇️ᴜʀʟ: ' + url + '\n\n╚═══════════◈' , 
+        let result = { msg : '╔══[🐶𝙱𝙾𝙱𝙸𝚉 𝙱𝙾𝚃🐕]══╗\n╠  *📥YT DOWNLOADER📤*  ╣\n╚═════════════╝\n\n║📽️ɴᴀᴍᴇ: ' + title2 + '\n\n║👁️ᴠɪᴇᴡs: ' + views + '\n\n║📹 ᴄʜᴀɴɴᴇʟ: ' + author + '\n\n║🖇️ᴜʀʟ: ' + url + '\n\n╚═══════════◈' , 
                       thumbnail : thumbnail ,
                       yuturl: url }
         return result
@@ -89,7 +89,7 @@ mek = mek.messages[0]
          try {
 		await conn.sendMessage(from , { audio : fs.readFileSync("./src/alive.mpeg") , mimetype : 'audio/mpeg' , ptt: true  } , { quoted: mek })
               var alivemsg = ''
-              if (config.ALIVEMSG == 'default') alivemsg = '```👋 Hi! I am online now. مرحبا أنا متصل الان في خدمتك سيدي😉```'
+              if (config.ALIVEMSG == 'default') alivemsg = '```👋 Hi! I am online now. 😉```'
               if ( config.ALIVEMSG !== 'default') alivemsg = config.ALIVEMSG
               const templateButtons = [
               { urlButton: {displayText: config.URL_1NAME , url: config.URL_1LINK }},
@@ -137,7 +137,7 @@ mek = mek.messages[0]
 		     .then(x => v.replyS(x))
          await conn.sendMessage(from, { delete: cstic.key })
          } else {
-	       v.reply('أين هي الصورة او الفيديو الذي تود ان تحوله للملصق يا عزيزي')
+	       v.reply('Where is the photo or video that you want to convert to the poster, my dear?')
         }
               break 
    // _ _ _ _ _ _ _ _ __  _ _ _ _ _ _  __  _ _ _ __ _  __ _  _ _ _ _ __ _ _  __  __ _  _ __  _ __ _ _ _  _ __ _  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __  __ _  __ _ _ _ _   //      
@@ -274,7 +274,7 @@ mek = mek.messages[0]
 	     if (!q) return await conn.sendMessage(from , { text: 'need fb link  اين هو رابط فيديو الفيسبوك الذي تريد تحميله' }, { quoted: mek } )      
 	     const isfb = q.includes('facebook.com')? q.includes('facebook.com') : q.includes('fb.watch')? q.includes('fb.watch') : ''
              if (!isfb) return await conn.sendMessage(from , { text: 'need fb link' }, { quoted: mek } )  
-		const msg = '╔══[🐶𝙱𝙾𝙱𝙸𝚉 𝙱𝙾𝚃🐕]══╗\n╠  *📥FB DOWNLOADER📤*  ╣\n╚═════════════╝\n\n║ اختر الجودة التي تريدها \n\n╚═════════════◈'
+		const msg = '╔══[🐶𝙱𝙾𝙱𝙸𝚉 𝙱𝙾𝚃🐕]══╗\n╠  *📥FB DOWNLOADER📤*  ╣\n╚═════════════╝\n\n║ Please Select Quality \n\n╚═════════════◈'
       const buttons = [
 {buttonId: prefix +'sdfb ' + q, buttonText: {displayText: 'SD '}, type: 1},
 {buttonId: prefix +'hdfb ' + q, buttonText: {displayText: 'HD '}, type: 1},
@@ -468,11 +468,11 @@ await conn.sendMessage(from, { delete: docsongup.key })
 		      
 	      case 'yts' :
 		      try {
-		      if (!q) return await conn.sendMessage(from , { text: 'أكتب عنوان الفيديو الدي تود البحث عنه'  }, { quoted: mek } )
+		      if (!q) return await conn.sendMessage(from , { text: 'Need keyword'  }, { quoted: mek } )
 		try {
 var arama = await yts(q);
 } catch(e) {
-return await conn.sendMessage(from , { text: 'لم يتم العثور على اي شيء ' }, { quoted: mek } )
+return await conn.sendMessage(from , { text: 'cant find' }, { quoted: mek } )
 }
 var mesaj = '';
 arama.all.map((video) => {
@@ -491,7 +491,7 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 	      case "apk" :
 	      case "findapk":
 		     try {
-			 if (!q) return await conn.sendMessage(from , { text: 'اين هو اسم الاتطبيق الذي تريد تحميله' }, { quoted: mek } )        
+			 if (!q) return await conn.sendMessage(from , { text: 'need keyword' }, { quoted: mek } )        
 		     const data2 = await axios.get('https://bobiz-api.herokuapp.com/api/playstore?q=' + q)
 		     const data = data2.data
 		     if (data.length < 1) return await  conn.sendMessage(from, { text: e2Lang.N_FOUND }, { quoted: mek } )
@@ -510,8 +510,8 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
     const listMessage = {
       text: " \n\n name : " + q + '\n\n ',
       footer: config.FOOTER,
-      title: '🐶BOBIZ BOT🐕 تحميل التطبيقات',
-      buttonText: "نتائج البحث اضغط هنا",
+      title: '🐶BOBIZ BOT🐕 Apk downloader',
+      buttonText: "Results",
       sections
   }
     await conn.sendMessage(from, listMessage, {quoted: mek })
@@ -533,8 +533,8 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
            const filedown = await conn.sendMessage(from , { text: config.FILE_UP }, { quoted: mek } )
 	  
 	 	 const app_link = await apk_link(n)
-	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'التطبيق الذي تريده حجمه كبير لا يمكن لبوبيز ان يرسله الحد الاقصى هو 200 ميغا' }, { quoted: mek } )
-         if ( app_link.size.includes('GB')) return await conn.sendMessage(from , { text: ' التطبيق الذي تريده حجمه كبير لا يمكن لبوبيز ان يرسله الحد الاقصى هو 200 ميغا' }, { quoted: mek } )
+	  if ( app_link.size.replace('MB' , '') > 200) return await conn.sendMessage(from , { text: 'Max size reached' }, { quoted: mek } )
+         if ( app_link.size.includes('GB')) return await conn.sendMessage(from , { text: 'Max size reached' }, { quoted: mek } )
 		  var ext = ''
 		  if (app_link.type.includes('Download XAPK')) { ext = '.xapk' } 
 		  else { ext = '.apk' }
@@ -542,7 +542,7 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
          await conn.sendMessage(from, { delete: filedown.key })
 		}
 		      catch(e) {
-await conn.sendMessage(from , { text: 'تعذر ارسال التطبيق آسف صديقي \n\n' + e }, { quoted: mek } )  
+await conn.sendMessage(from , { text: 'cant find \n\n' + e }, { quoted: mek } )  
 } 
 		      
 	      break  
