@@ -589,17 +589,19 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
 		    try {
 			 if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } ) 
 			 const data = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
-                       const title = data.title
-		       const media = data.url
+                       
 		 
 const xxxdown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: xxxdown.key })
 const xxxup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
-await conn.sendMessage(from ,{ video: { url : media } , caption: title } , { quoted: mek })
+await conn.sendMessage(from ,{ video: { url : data.url } , caption: data.title } , { quoted: mek })
 await conn.sendMessage(from, { delete: xxxup.key })
 		      
 	      
-	      }      
+	      }
+		      catch(e) {
+await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )  
+} 
 	      break  
 		      
  //_______________________________________________________________________________________________________________________________________________________   //		      
