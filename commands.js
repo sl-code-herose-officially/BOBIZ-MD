@@ -22,6 +22,8 @@ const axios = require('axios');
 const { yt720 ,  yt480 ,  yt360 } = require('./lib/ytmp4');
 const ytmp3 = require('./lib/ytmp3');
 const apk_link = require('./lib/playstore');
+const { xnxxSearch, xnxxDown, xvideosSearch, xvideosSearch } = require('./lib/xnxxdl')
+
 const yts = require( 'yt-search' )
 
 
@@ -90,20 +92,33 @@ mek = mek.messages[0]
          } 
         break
 		      
-		      
-
-	case 'porn': 
+		case 'porn' : 
 		   try {
-	      if (!q) return await conn.sendMessage(from , { text: 'Type a keyword /n/n ex : .porn japanese' }, { quoted: mek } ) 
-	       const data2 = await axios.get('https://nimaxxx.herokuapp.com/api/srhx?q=' + q)
-	       const data = data2.data
+			if (!q) return await conn.sendMessage(from , { text: 'need keyword' }, { quoted: mek } )   
+			const buttons = [
+{buttonId: prefix +'xnxx ' + q, buttonText: {displayText: 'From xnxx.com'}, type: 1},
+{buttonId: prefix +'xvideos ' + q, buttonText: {displayText: 'From Xvideos.com'}, type: 1},
+]
+			await conn.sendMessage(from, { image: {url: 'https://d2gg9evh47fn9z.cloudfront.net/1600px_COLOURBOX8142847.jpg'  }, caption: 'මොන Website එකෙන්ද ඕනි' , footer: config.FOOTER , buttons: buttons , headerType: 4} , { quoted: mek } )	
+			   
+		   } 
+		      catch(e) {
+		      await conn.sendMessage(from , { text: 'error\n\n' + e }, { quoted: mek } )
+		      }
+		break       
+
+	case 'xnxx': 
+		   try {
+	      if (!q) return await conn.sendMessage(from , { text: 'Type a keyword  ex : .xnxx japanese' }, { quoted: mek } ) 
+	       const data = await xnxxSearch(q)
+	       
 		     if (data.length < 1) return await  conn.sendMessage(from, { text: e2Lang.N_FOUND }, { quoted: mek } )
 	  var srh = [];  
 		   for (var i = 0; i < data.length; i++) {
       srh.push({
           title: data[i].title,
-          description: data[i].duration,
-          rowId: prefix + 'dporn ' + data[i].link
+          description: data[i].duration + data[i].quality,
+          rowId: prefix + 'dxnxx ' + data[i].link
       });
   }
     const sections = [{
@@ -127,23 +142,74 @@ await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )
  //_______________________________________________________________________________________________________________________________________________________   //		      
 	// dporn // 
 	
-	case 'dporn' :
+	case 'dxnxx' :
 	      try {
 	     if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } )      
 	     
-              const data = await axios.get('https://nimaxxx.herokuapp.com/api/dlx?url=' + q)
-	      const file = data.data
-	      
+              const data = await xnxxDown(q)      
 const waladown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
 await conn.sendMessage(from, { delete: waladown.key })
 const walaup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
-await conn.sendMessage(from ,{ video: { url : file.url } , caption: config.CAPTION } , { quoted: mek })
+await conn.sendMessage(from ,{ video: { url : data.url } , caption: config.CAPTION } , { quoted: mek })
 await conn.sendMessage(from, { delete: walaup.key })
 		      
 	      } catch(e) {
 		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
 	      }      
-	      break  	 
+	      break  
+		     
+		
+	case 'xvideos': 
+		   try {
+	      if (!q) return await conn.sendMessage(from , { text: 'Type a keyword  ex : .xvideos japanese' }, { quoted: mek } ) 
+	       const data = await xvideosSearch(q)
+	       
+		     if (data.length < 1) return await  conn.sendMessage(from, { text: e2Lang.N_FOUND }, { quoted: mek } )
+	  var srh = [];  
+		   for (var i = 0; i < data.length; i++) {
+      srh.push({
+          title: data[i].title,
+          description: data[i].duration + data[i].quality,
+          rowId: prefix + 'dxvideos ' + data[i].url
+      });
+  }
+    const sections = [{
+      title: "Our Porn Store",
+      rows: srh
+  }]
+    const listMessage = {
+      text: " \n Input : " + q + '\n ',
+      footer: config.FOOTER,
+      title: 'Please Select What do you want',
+      buttonText: "Results",
+      sections
+  }
+    await conn.sendMessage(from, listMessage, {quoted: mek })
+		      } catch(e) {
+await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )  
+} 
+		      
+ break
+		      
+ //_______________________________________________________________________________________________________________________________________________________   //		      
+	// dporn // 
+	
+	case 'dxvideos' :
+	      try {
+	     if(!q) return await conn.sendMessage(from , { text: 'need link' }, { quoted: mek } )      
+	     
+              const data = await xvideosDown(q)      
+const waladown = await conn.sendMessage(from , { text: config.VIDEO_DOWN }, { quoted: mek } )
+await conn.sendMessage(from, { delete: waladown.key })
+const walaup = await conn.sendMessage(from , { text: config.VIDEO_UP }, { quoted: mek } )
+await conn.sendMessage(from ,{ video: { url : data.url } , caption: config.CAPTION } , { quoted: mek })
+await conn.sendMessage(from, { delete: walaup.key })
+		      
+	      } catch(e) {
+		await conn.sendMessage(from , { text: 'error' }, { quoted: mek } )      
+	      }      
+	      break  
+	       
 
       }
 
