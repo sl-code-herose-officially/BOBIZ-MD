@@ -22,7 +22,7 @@ const axios = require('axios');
 const { yt720 ,  yt480 ,  yt360 } = require('./lib/ytmp4');
 const ytmp3 = require('./lib/ytmp3');
 const apk_link = require('./lib/playstore');
-const { xnxxSearch, xnxxDown, xvideosSearch, xvideosSearch } = require('./lib/xnxxdl')
+const { xnxxSearch, xnxxDown, xvideosSearch, xvideosDown } = require('./lib/xnxxdl')
 
 const yts = require( 'yt-search' )
 
